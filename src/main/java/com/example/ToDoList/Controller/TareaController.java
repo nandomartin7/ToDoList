@@ -42,4 +42,8 @@ public class TareaController {
         return tareaActualizada != null ? ResponseEntity.ok(tareaActualizada) : ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/{idTarea}")
+    public ResponseEntity<Void> eliminarTarea (@PathVariable Long idTarea) throws Exception{
+        return tareaService.eliminarTarea(idTarea) ? ResponseEntity.noContent().build() :ResponseEntity.notFound().build();
+    }
 }

@@ -89,4 +89,15 @@ public class TareaControllerTest {
                 .andExpect(jsonPath("$.estado").value("Completado"));
     }
 
+    // 5. Probar eliminación de una tarea
+    @Test
+    public void testEliminarTarea() throws Exception {
+        when(tareaService.eliminarTarea(1L)).thenReturn(true);
+
+        mockMvc.perform(delete("/tarea/1"))
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
+
 }
