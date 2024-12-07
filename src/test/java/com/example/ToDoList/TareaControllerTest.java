@@ -56,4 +56,20 @@ public class TareaControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(org.hamcrest.Matchers.containsString("Se registro la tarea:")));
     }
+
+    // 3. Probar listado de tareas
+    @Test
+    public void testListarTareas() throws Exception {
+        Tarea tarea1 = new Tarea();
+        tarea1.setIdTarea(1L);
+        tarea1.setTitulo("Tarea 1");
+        tarea1.setDescripcion("Descripción tarea 1");
+
+        when(tareaService.listarTareas()).thenReturn(Arrays.asList(tarea1));
+
+        mockMvc.perform(get("/tarea"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].titulo").value("Tarea 1"));
+    }
 }

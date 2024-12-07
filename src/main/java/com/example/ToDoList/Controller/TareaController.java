@@ -30,4 +30,11 @@ public class TareaController {
                 "\nTitulo: "+nuevaTarea.getTitulo()+"\nDescripcion: "+nuevaTarea.getDescripcion());
     }
 
+    @GetMapping()
+    public List<Tarea> listarTareas(){
+        List<Tarea> tareas = tareaService.listarTareas();
+        return tareas;
+    }
+
+
 }
