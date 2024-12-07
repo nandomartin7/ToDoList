@@ -72,4 +72,21 @@ public class TareaControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].titulo").value("Tarea 1"));
     }
+
+    // 4. Probar actualización de estado de una tarea
+    @Test
+    public void testActualizarEstadoTarea() throws Exception {
+        Tarea tareaActualizada = new Tarea();
+        tareaActualizada.setIdTarea(1L);
+        tareaActualizada.setEstado("Completado");
+
+        when(tareaService.actualizarEstado(1L, "Completado")).thenReturn(tareaActualizada);
+
+        mockMvc.perform(patch("/tarea/1")
+                        .param("estado", "Completado"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.estado").value("Completado"));
+    }
+
 }

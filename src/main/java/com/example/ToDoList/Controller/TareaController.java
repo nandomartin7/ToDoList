@@ -36,5 +36,10 @@ public class TareaController {
         return tareas;
     }
 
+    @PatchMapping("/{idTarea}")
+    public ResponseEntity<Tarea> actualizarTarea(@PathVariable Long idTarea, @RequestParam String estado) throws Exception{
+        Tarea tareaActualizada = tareaService.actualizarEstado(idTarea, estado);
+        return tareaActualizada != null ? ResponseEntity.ok(tareaActualizada) : ResponseEntity.notFound().build();
+    }
 
 }
