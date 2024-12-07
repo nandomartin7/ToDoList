@@ -23,4 +23,11 @@ public class TareaController {
         return "Proyecto funcionando";
     }
 
+    @PostMapping()
+    public ResponseEntity<String> crearTarea(@RequestBody Tarea tarea){
+        Tarea nuevaTarea = tareaService.crearTarea(tarea);
+        return ResponseEntity.ok("Se registro la tarea:\nId:"+nuevaTarea.getIdTarea()+
+                "\nTitulo: "+nuevaTarea.getTitulo()+"\nDescripcion: "+nuevaTarea.getDescripcion());
+    }
+
 }
